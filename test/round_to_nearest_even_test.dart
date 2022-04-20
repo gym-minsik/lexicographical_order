@@ -2,7 +2,7 @@ import 'package:test/expect.dart';
 import 'package:test/scaffolding.dart';
 import '../lib/src/math.dart';
 
-void testRoundToNearestEven() {
+void main() {
   group('roundToNearestEven()', () {
     test('7.49 => 7', () => expect(7.49.roundToNearestEven(), 7));
     test('7.51 => 8', () => expect(7.51.roundToNearestEven(), 8));

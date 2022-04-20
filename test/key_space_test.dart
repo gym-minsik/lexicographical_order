@@ -1,7 +1,7 @@
 import 'package:test/test.dart';
 import '../lib/src/key_space.dart';
 
-void testKeySpace() {
+void main() {
   group('key_space', () {
     test("'keys' should be sorted", () {
       expect(keys, List.of(keys, growable: false)..sort());

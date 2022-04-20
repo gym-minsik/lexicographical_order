@@ -1,7 +1,7 @@
 import 'package:lexicographical_order/lexicographical_order.dart';
 import 'package:test/test.dart';
 
-void testGenerateOrderKeys() {
+void main() {
   group('generateOrderKeys', () {
     _testNotPositiveKeyCount();
     _testGeneratedKeysShouldBeSorted();
