@@ -51,10 +51,17 @@ void _consecutive() {
     final result = between(prev: prev, next: next);
     expect([result, next, prev]..sort(), [prev, result, next]);
   });
-  test('Consecutie case #2', () {
+  test('Consecutive case #2', () {
     const prev = 'ABH';
     const next = 'ABIw';
     final result = between(prev: prev, next: next);
+    expect([result, next, prev]..sort(), [prev, result, next]);
+  });
+  test('Consecutive case #3', () {
+    const prev = 'ABHz';
+    const next = 'ABIn';
+    final result = between(prev: prev, next: next);
+    expect(result, 'ABHza');
     expect([result, next, prev]..sort(), [prev, result, next]);
   });
 }
