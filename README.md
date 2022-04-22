@@ -1,6 +1,6 @@
 # About
 
-A string generator that helps to implement real-time editing of ordered sequence.
+A string generator that helps to implement real-time editing of an ordered sequence.
 
 It makes reordering, sorting, interleaving transactions faster and simpler. 
 
