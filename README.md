@@ -1,6 +1,6 @@
 # About
 
-A string generator that helps to implement  reordering on top of a database 
+A string generator that helps to implement real-time editing of ordered sequence.
 
 It makes reordering, sorting, interleaving transactions faster and simpler. 
 
@@ -13,7 +13,7 @@ It makes reordering, sorting, interleaving transactions faster and simpler.
   ```dart
   final mid = between(prev: 'B', next: 'D');
   assert(
-    areListsEqual(
+    areEqual(
       [mid, 'D', 'B']..sort(),
       ['B', mid, 'D'],
     ),
@@ -41,7 +41,7 @@ It makes reordering, sorting, interleaving transactions faster and simpler.
      }
      ```
   
-  2. when migrating to an efficient reorderable system.
+  2. when migrating to an efficient ordered system.
   
      ```dart
      Future<void> migrateToLexicalOrderSystem(Table table) async {
@@ -50,8 +50,6 @@ It makes reordering, sorting, interleaving transactions faster and simpler.
        /* omitted */
      }
      ```
-
-
 
 
 
@@ -65,19 +63,23 @@ more precisely, the following code is used inside `between`.
 LexOrderValidator().checkBetweenArgs(prev: prev, next: next);
 ```
 
-The `LexOrderValidator` checks the follwing constraints:
+The `LexOrderValidator` checks the following constraints:
 
- 1.  both `prev` and `next` must be empty or composed of alphabets.
+ 1. both `prev` and `next` must be composed of alphabets.
 
- 2.  `next` must not be 'A'
+ 2. `prev.isNotEmpty && next.isNotEmpty`
 
- 3.  `prev` and `next` must not be equal to each other.
+ 3. `prev != null && next != null`
 
- 4.  if both `prev` and `next` are not empty, `prev` must not succeed `next` in the lexicographical order. for example:
+ 4. `next != 'A'`
 
-     ```dart
-     between(prev: 'C', next: 'B');
-     ```
+ 5. `prev != next`
+
+ 6. `prev.compareTo(next) == -1`, for example:
+
+    ```dart
+    between(prev: 'C', next: 'B');
+    ```
 
 
 In debug mode, you get an error if you violate the above constraints. but not in release mode. you can check the constraints manually by using `LexOrderValidator`.
