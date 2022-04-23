@@ -108,62 +108,83 @@ void _testWithNullArgs() {
 }
 
 void _exceptionCase() {
-  test('should throw NotComposedOfAllowedCharactersError #1', () {
+  test('should throw ArgumentError WHEN non-alphabet string was passed. #1', () {
     const prev = 'A';
     const next = '*%ABc';
     expect(
       () => between(prev: prev, next: next),
-      throwsA(isA<NotComposedOfAllowedCharactersError>()),
+      throwsA(isArgumentError),
     );
   });
-  test('should throw NotComposedOfAllowedCharactersError #2', () {
+  test('should throw ArgumentError WHEN non-alphabet string was passed. #2', () {
     const next = '*%1c';
     const prev = 'Hji';
     expect(
       () => between(prev: prev, next: next),
-      throwsA(isA<NotComposedOfAllowedCharactersError>()),
+      throwsA(isArgumentError),
     );
   });
-  test('should throw NotComposedOfAllowedCharactersError #3', () {
+  test('should throw ArgumentError WHEN non-alphabet string was passed. #3', () {
     const next = '*%1c';
     const prev = '(&ZC3&';
     expect(
       () => between(prev: prev, next: next),
-      throwsA(isA<NotComposedOfAllowedCharactersError>()),
+      throwsA(isArgumentError),
     );
   });
-  test('should throw NextMustNotBeForemostCharacterError', () {
-    expect(
-      () => between(prev: '', next: 'A'),
-      throwsA(isA<NextMustNotBeForemostCharacterError>()),
-    );
-  });
-  test('should throw PrevAndNextMustNotBeEqualError #1', () {
+  test('should throw ArgumentError WHEN empty strings were passed. #1', () {
     expect(
       () => between(prev: '', next: ''),
-      throwsA(isA<PrevAndNextMustNotBeEqualError>()),
+      throwsA(isArgumentError),
     );
   });
-  test('should throw PrevAndNextMustNotBeEqualError #2', () {
+  test('should throw ArgumentError WHEN empty strings were passed. #2', () {
     expect(
       () => between(),
-      throwsA(isA<PrevAndNextMustNotBeEqualError>()),
+      throwsA(isArgumentError),
     );
   });
-  test('should throw PrevAndNextMustNotBeEqualError #3', () {
+  test('should throw ArgumentError WHEN same strings were passed.', () {
     const prev = 'GH';
     const next = 'GH';
     expect(
       () => between(prev: prev, next: next),
-      throwsA(isA<PrevAndNextMustNotBeEqualError>()),
+      throwsA(isArgumentError),
     );
   });
-  test('should throw PrevCannotSucceedNextError', () {
+  test('should throw ArgumentError WHEN a string containing `A` at the end was passed. #1', () {
+    const prev = 'GH';
+    const next = 'GHA';
+    expect(
+      () => between(prev: prev, next: next),
+      throwsA(isArgumentError),
+    );
+  });
+  test('should throw ArgumentError WHEN a string containing `A` at the end was passed. #2', () {
+    expect(
+      () => between(prev: '', next: 'A'),
+      throwsA(isArgumentError),
+    );
+  });
+  test('should throw ArgumentError WHEN a string containing `A` at the end was passed. #3', () {
+    expect(
+      () => between(prev: 'ABC', next: 'ABCAA'),
+      throwsA(isArgumentError),
+    );
+  });
+
+  test('should throw ArgumentError WHEN a string containing `A` at the end was passed. #4', () {
+    expect(
+      () => between(prev: 'HzA', next: 'Ix'),
+      throwsA(isArgumentError),
+    );
+  });
+  test('should throw ArgumentError WHEN prev is ordered after next.', () {
     const prev = 'D';
     const next = 'B';
     expect(
       () => between(prev: prev, next: next),
-      throwsA(isA<PrevCannotSucceedNextError>()),
+      throwsA(isArgumentError),
     );
   });
 }

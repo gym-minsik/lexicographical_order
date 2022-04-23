@@ -16,73 +16,44 @@ class LexOrderValidator {
   }
 
   void checkBetweenArgs({String? prev, String? next}) {
-    if (!isComposedOfAllowedCharacters(prev ?? '')) {
-      throw NotComposedOfAllowedCharactersError(prev!);
+    if (!(isComposedOfAllowedCharacters(prev ?? '') &&
+        isComposedOfAllowedCharacters(next ?? ''))) {
+      throw ArgumentError(
+        'the arguments must be composed of alphabets'
+        'but prev == $prev, next == $next',
+      );
     }
-    if (!isComposedOfAllowedCharacters(next ?? '')) {
-      throw NotComposedOfAllowedCharactersError(next!);
-    }
-    if (next == keys.first) throw NextMustNotBeForemostCharacterError(next!);
     if (prev == next) {
-      throw PrevAndNextMustNotBeEqualError(prev: prev, next: next);
+      throw ArgumentError(
+        'both prev and next but not be equal, '
+        'but prev == $prev, next == $next',
+      );
     }
     if (prev != null &&
         next != null &&
         prev.isNotEmpty &&
         next.isNotEmpty &&
         prev.compareTo(next) != -1) {
-      throw PrevCannotSucceedNextError(prev: prev, next: next);
+      throw ArgumentError(
+        'prev must be ordered befor next, '
+        'but prev == $prev, next == $next',
+      );
     }
-  }
-}
-
-class NotComposedOfAllowedCharactersError extends Error {
-  final String argument;
-
-  NotComposedOfAllowedCharactersError(this.argument);
-
-  @override
-  String toString() {
-    return "You've passed the invalid argument('$argument) composed of disallowed characters."
-        " an argument must be composed of alphabets.";
-  }
-}
-
-class NextMustNotBeForemostCharacterError extends Error {
-  final String argument;
-
-  NextMustNotBeForemostCharacterError(this.argument);
-
-  @override
-  String toString() {
-    return "'next' parameter must not be 'A' because no characters can precede 'A'.";
-  }
-}
-
-class PrevAndNextMustNotBeEqualError extends Error {
-  final String? prev;
-  final String? next;
-  PrevAndNextMustNotBeEqualError({
-    required this.prev,
-    required this.next,
-  });
-
-  @override
-  String toString() {
-    return "prev and next must not be equal. but prev($prev) and next($next) passed.";
-  }
-}
-
-class PrevCannotSucceedNextError extends Error {
-  final String prev;
-  final String next;
-  PrevCannotSucceedNextError({
-    required this.prev,
-    required this.next,
-  });
-
-  @override
-  String toString() {
-    return "prev can't succeed next in a lexicographical order. but prev($prev) and next($next) passed";
+    if (prev != null &&
+        prev.isNotEmpty &&
+        prev[prev.length - 1] == keys.first) {
+      throw ArgumentError(
+        'the arguments must not have `A` at the end, '
+        'but prev == $prev, next == $next',
+      );
+    }
+    if (next != null &&
+        next.isNotEmpty &&
+        next[next.length - 1] == keys.first) {
+      throw ArgumentError(
+        'the arguments must not have `A` at the end, '
+        'but prev == $prev, next == $next',
+      );
+    }
   }
 }
