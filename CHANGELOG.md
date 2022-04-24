@@ -1,3 +1,17 @@
+## 1.3.2
+- Refactoring
+  - improve redability of `between.`
+
+  - add the missing contraint checks.
+
+  - remove custom error types.
+
+  - improve documentation.
+
+- 
+  add missing test case. 
+
+
 ## 1.3.1
 - fix #7
 
