@@ -4,10 +4,12 @@ import './key_space.dart';
 
 /// Get a string between two strings in a lexicographical order.
 /// - Constarints
-///   allowed character = ABCDEFGHIJKLMNOPQRSTUWXYZabcdefghijklmnopqrstuwxyz
-///   - prev and next should consist only of allowed characters.
-///   - prev and next shouldn't be equal to each other
-///   - prev should not precede next in a lexicographical order
+///   - both `prev` and `next` must be composed of alphabets.
+///   - `prev.isNotEmpty && next.isNotEmpty`
+///   - `prev != null && next != null`
+///   - `prev != next`
+///   - `next != 'A'`
+///   - `prev < next`
 ///
 /// This function does not check the constraints specified above in the release build
 /// for performance reasons.
@@ -20,34 +22,45 @@ String between({String? prev, String? next}) {
 
   final String prevStr = prev ?? '';
   final String nextStr = next ?? '';
+  late int p, n;
+  int g = 0;
+  String result = '';
 
-  late int _prev, _next;
-  int pos = 0;
-  String str;
-  for (; pos == 0 || _prev == _next; pos++) {
-    _prev = pos < prevStr.length ? keyToIndex[prevStr[pos]]! : -1;
-    _next =
-        pos < nextStr.length ? keyToIndex[nextStr[pos]]! : keyToIndex.length;
+  // find the same part of lead substring.
+  while (g == 0 || p == n) {
+    p = g < prevStr.length ? keyToIndex[prevStr[g]]! : -1;
+    n = g < nextStr.length ? keyToIndex[nextStr[g]]! : keys.length;    
+    g++;
   }
-  str = prevStr.substring(0, pos - 1);
-  if (_prev == -1) {
-    while (_next == 0) {
-      _next = pos < nextStr.length
-          ? keyToIndex[nextStr[pos++]]!
-          : keyToIndex.length;
-      str += keys.first;
+  result += prevStr.substring(0, g-1); // or nextStr.substring(0, g-1) is also ok.
+
+  // if prev == next.substrring(0, g)
+  if (p == -1) {
+    // has A or B
+    while (n == 0) {
+      n = g < nextStr.length ? keyToIndex[nextStr[g]]! : keys.length;
+      result += keys.first;
+      g++;
     }
-    if (_next == 1) {
-      str += keys.first;
-      _next = keyToIndex.length;
+    if (n == 1) {
+      result += keys.first;
+      n = keys.length;
     }
-  } else if (_prev + 1 == _next) {
-    str += keys[_prev];
-    _next = keyToIndex.length;
-    while ((_prev = pos < prevStr.length ? keyToIndex[prevStr[pos++]]! : -1) ==
-        keyToIndex.length - 1) {
-      str += keys.last;
+  } // consecutive
+  else if (p == n - 1) {
+    result += keys[p];
+    n = keys.length;
+    p = g < prevStr.length ? keyToIndex[prevStr[g]]! : -1;
+    // if prevStr[g] == 'z'
+    while (p == keys.length - 1) {
+      result += keys.last;
+      g++;
+      p = g < prevStr.length ? keyToIndex[prevStr[g]]! : -1;
     }
   }
-  return str + keys[((_prev + _next) / 2).ceil()];
+
+  final median = ((p+n) / 2).ceil();
+  result += keys[median];
+
+  return result;
 }
