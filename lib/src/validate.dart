@@ -1,6 +1,6 @@
 import 'package:lexicographical_order/src/key_space.dart';
 
-/// Validator for [between](./between.html) function
+/// Validator for [between](./between.html) function.
 class LexOrderValidator {
   const LexOrderValidator();
 

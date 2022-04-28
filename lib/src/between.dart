@@ -2,17 +2,31 @@ import 'package:lexicographical_order/src/validate.dart';
 
 import './key_space.dart';
 
-/// Get a string between two strings in a lexicographical order.
+/// Get a string between two strings in the lexicographical order.
 /// - Constarints
 ///   - both `prev` and `next` must be composed of alphabets.
 ///   - `prev.isNotEmpty && next.isNotEmpty`
 ///   - `prev != null && next != null`
 ///   - `prev != next`
-///   - `next != 'A'`
-///   - `prev < next`
+///   - `prev[prev.length-1] != 'A' && next[next.length-1] != 'A'`
+///   - `prev.compareTo(next) == -1`
+///
+/// The worst-case time compexity is `O(n)` where `n = max(prev.length, next.length) + 1`,
+/// but usually, `n` is very short as `between` and `generateOrderKeys` strive to generate
+/// a string of as short a length as possible.
 ///
 /// This function does not check the constraints specified above in the release build
 /// for performance reasons.
+///
+/// Example:
+/// ```dart
+/// final orderKey = between(
+///   prev: todos[3].orderKey,
+///   next: todos[4].orderKey,
+/// );
+/// final newTodo = repository.create(command, orderKey);
+/// todos.insert(newTodo);
+/// ```
 String between({String? prev, String? next}) {
   assert(() {
     final validator = const LexOrderValidator();
@@ -26,13 +40,13 @@ String between({String? prev, String? next}) {
   int g = 0;
   String result = '';
 
-  // find the same part of lead substring.
+  // find the same part.
   while (g == 0 || p == n) {
     p = g < prevStr.length ? keyToIndex[prevStr[g]]! : -1;
-    n = g < nextStr.length ? keyToIndex[nextStr[g]]! : keys.length;    
+    n = g < nextStr.length ? keyToIndex[nextStr[g]]! : keys.length;
     g++;
   }
-  result += prevStr.substring(0, g-1); // or nextStr.substring(0, g-1) is also ok.
+  result += prevStr.substring(0, g - 1);
 
   // if prev == next.substrring(0, g)
   if (p == -1) {
@@ -59,7 +73,7 @@ String between({String? prev, String? next}) {
     }
   }
 
-  final median = ((p+n) / 2).ceil();
+  final median = ((p + n) / 2).ceil();
   result += keys[median];
 
   return result;

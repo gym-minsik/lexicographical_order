@@ -12,8 +12,8 @@ List<String> _generateExtraSteps(int count) {
   return result;
 }
 
-/// Permutation with repetition
-/// the stack depth complexity is O(log52 `keyCount`).
+/// Permutation with repetition.
+/// the stack depth complexity is O(log52 `keyCount`),
 /// `keyCount` is the argument of generateOrderKeys(keyCount).
 List<String> _generateFoundation(int length) {
   final result = <String>[];
@@ -65,13 +65,24 @@ Iterable<String> _generate(int count) sync* {
 
 /// Generate strings that satisfy the follwing constraints:
 /// 1. the lexicographical order.
-/// 2. minimal use of characters.
-/// 3. equally-spaced to use as few additional characters as possible in the future.
+/// 2. equally-spaced to use as few additional characters as possible in the future.
 ///
-/// ## How to use?
+/// ### How to use?
 /// - If you have an ordered database table or collection for which you want to
-///   switch to efficient ordering system, generate order keys with this.
+///   switch to efficient ordered system, generate order keys with this.
 /// - For the first order keys, use `generateOrderKeys(orderKeyCount)`.
+///
+/// Example:
+/// ```dart
+/// Future<void> addTodo(CreateTodo command) async {
+///   final String orderKey = todos.isEmpty
+///     ? generateOrderKeys(1).first // <==
+///     : between(prev: todos.last.orderKey);
+///
+///   final todo = await todoRepository.create(command, orderKey);
+///   todos.add(todo);
+/// }
+///```
 Iterable<String> generateOrderKeys(int count) sync* {
   if (count <= 0) {
     return;

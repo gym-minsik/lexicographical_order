@@ -1,5 +1,5 @@
 name: lexicographical_order
-description: A string generator that helps to implement a lexicographical order(lexical order). this makes reordering transactions faster and simpler. 
+description: A string generator that helps to implement real-time editing of an ordered sequence. this makes reordering transactions faster and simpler. 
 version: 1.3.3
 repository: https://github.com/sylfreee/lexicographical_order
 environment:

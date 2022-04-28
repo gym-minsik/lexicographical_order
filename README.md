@@ -69,8 +69,6 @@ The `LexOrderValidator` checks the following constraints:
 
  3. `prev != null && next != null`
 
- 4. `next != 'A'`
-
  5. `prev != next`
 
  6. `prev[prev.length-1] != 'A' && next[next.length-1] != 'A'`

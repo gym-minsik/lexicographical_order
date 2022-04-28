@@ -108,7 +108,8 @@ void _testWithNullArgs() {
 }
 
 void _exceptionCase() {
-  test('should throw ArgumentError WHEN non-alphabet string was passed. #1', () {
+  test('should throw ArgumentError WHEN non-alphabet string was passed. #1',
+      () {
     const prev = 'A';
     const next = '*%ABc';
     expect(
@@ -116,7 +117,8 @@ void _exceptionCase() {
       throwsA(isArgumentError),
     );
   });
-  test('should throw ArgumentError WHEN non-alphabet string was passed. #2', () {
+  test('should throw ArgumentError WHEN non-alphabet string was passed. #2',
+      () {
     const next = '*%1c';
     const prev = 'Hji';
     expect(
@@ -124,7 +126,8 @@ void _exceptionCase() {
       throwsA(isArgumentError),
     );
   });
-  test('should throw ArgumentError WHEN non-alphabet string was passed. #3', () {
+  test('should throw ArgumentError WHEN non-alphabet string was passed. #3',
+      () {
     const next = '*%1c';
     const prev = '(&ZC3&';
     expect(
@@ -152,7 +155,9 @@ void _exceptionCase() {
       throwsA(isArgumentError),
     );
   });
-  test('should throw ArgumentError WHEN a string containing `A` at the end was passed. #1', () {
+  test(
+      'should throw ArgumentError WHEN a string containing `A` at the end was passed. #1',
+      () {
     const prev = 'GH';
     const next = 'GHA';
     expect(
@@ -160,20 +165,26 @@ void _exceptionCase() {
       throwsA(isArgumentError),
     );
   });
-  test('should throw ArgumentError WHEN a string containing `A` at the end was passed. #2', () {
+  test(
+      'should throw ArgumentError WHEN a string containing `A` at the end was passed. #2',
+      () {
     expect(
       () => between(prev: '', next: 'A'),
       throwsA(isArgumentError),
     );
   });
-  test('should throw ArgumentError WHEN a string containing `A` at the end was passed. #3', () {
+  test(
+      'should throw ArgumentError WHEN a string containing `A` at the end was passed. #3',
+      () {
     expect(
       () => between(prev: 'ABC', next: 'ABCAA'),
       throwsA(isArgumentError),
     );
   });
 
-  test('should throw ArgumentError WHEN a string containing `A` at the end was passed. #4', () {
+  test(
+      'should throw ArgumentError WHEN a string containing `A` at the end was passed. #4',
+      () {
     expect(
       () => between(prev: 'HzA', next: 'Ix'),
       throwsA(isArgumentError),
