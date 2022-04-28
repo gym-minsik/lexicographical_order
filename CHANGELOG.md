@@ -1,3 +1,7 @@
+## 1.3.4
+- add an exmaple.
+- improve the documentation.
+
 ## 1.3.3
 - Refactoring
   - improve redability of `between.`
