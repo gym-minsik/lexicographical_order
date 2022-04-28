@@ -8,3 +8,6 @@ environment:
 dev_dependencies:
   lints: ^1.0.0
   test: ^1.16.0
+  equatable: ^2.0.3
+  fast_immutable_collections: ^7.3.1
+  to_string_pretty:
