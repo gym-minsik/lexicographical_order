@@ -2,7 +2,7 @@
 
 A string generator that helps to implement real-time editing of an ordered sequence.
 
-It makes reordering, sorting, interleaving transactions faster and simpler. 
+It makes reordering, sorting, and interleaving transactions faster and simpler.
 
 
 
