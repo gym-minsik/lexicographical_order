@@ -1,3 +1,7 @@
+## 1.4.0
+- Improved the documentation.
+- Updated pubspec.yaml for Dart 3.0 support.
+
 ## 1.3.4
 - add an exmaple.
 - improve the documentation.

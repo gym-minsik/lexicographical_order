@@ -1,11 +1,11 @@
 # About
 
-A string generator created to make real-time editing of ordered sequences more efficient by facilitating the reordering, sorting, and interleaving of transactions.
+A string generator designed to enhance real-time editing of ordered sequences by making the process of reordering, sorting, and interleaving transactions more efficient.
 
 # Usage
 
 - **between(String prev, String next)**.    
-This function returns a string that is lexicographically between two given strings, `prev` and `next`. The returned string is intended to be used as a sort key for some data.
+It generates a lexicographically ordered string between `prev` and `next`. The returned string is intended to be used as a sort key for some data.
 
   ```dart
   final mid = between(prev: 'B', next: 'D');
@@ -18,7 +18,7 @@ This function returns a string that is lexicographically between two given strin
   ```
 
 - **generateOrderKeys(int keyCount)**.   
-This function generates a series of strings to serve as sorting keys for data.
+It generates a series of strings to serve as sorting keys for data.
 
   ```dart
   final keyCount = 100; 
@@ -49,6 +49,6 @@ This function generates a series of strings to serve as sorting keys for data.
      }
      ```
 
-# Caution
+# Note of Caution
 
-It's advised to use only 'between' and 'generateOrderKey' for key generation, as this package is specifically designed for this task. Utilizing arguments from other sources in conjunction with the 'between' function may compromise the ordered state of your data.
+For optimal results, it is recommended to exclusively utilize the 'between' and 'generateOrderKey' functions provided by this package for key generation. These functions are specifically tailored to maintain the lexicographical order of your data. The use of arguments derived from external sources in conjunction with the 'between' function may inadvertently disrupt the intended ordering of your data.

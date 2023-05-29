@@ -19,13 +19,13 @@ class LexOrderValidator {
     if (!(isComposedOfAllowedCharacters(prev ?? '') &&
         isComposedOfAllowedCharacters(next ?? ''))) {
       throw ArgumentError(
-        'the arguments must be composed of alphabets'
+        'Both arguments must be composed of alphabets, '
         'but prev == $prev, next == $next',
       );
     }
     if (prev == next) {
       throw ArgumentError(
-        'both prev and next but not be equal, '
+        'The values of prev and next must not be equal, '
         'but prev == $prev, next == $next',
       );
     }
@@ -35,7 +35,7 @@ class LexOrderValidator {
         next.isNotEmpty &&
         prev.compareTo(next) != -1) {
       throw ArgumentError(
-        'prev must be ordered befor next, '
+        'Prev must be lexicographically before next, '
         'but prev == $prev, next == $next',
       );
     }
@@ -43,7 +43,7 @@ class LexOrderValidator {
         prev.isNotEmpty &&
         prev[prev.length - 1] == keys.first) {
       throw ArgumentError(
-        'the arguments must not have `A` at the end, '
+        'The argument should not end with `A`, '
         'but prev == $prev, next == $next',
       );
     }
@@ -51,7 +51,7 @@ class LexOrderValidator {
         next.isNotEmpty &&
         next[next.length - 1] == keys.first) {
       throw ArgumentError(
-        'the arguments must not have `A` at the end, '
+        'The argument should not end with `A`, '
         'but prev == $prev, next == $next',
       );
     }

@@ -2,21 +2,20 @@ import 'package:lexicographical_order/src/validate.dart';
 
 import './key_space.dart';
 
-/// Get a string between two strings in the lexicographical order.
-/// - Constarints
-///   - both `prev` and `next` must be composed of alphabets.
-///   - `prev.isNotEmpty && next.isNotEmpty`
-///   - `prev != null && next != null`
-///   - `prev != next`
-///   - `prev[prev.length-1] != 'A' && next[next.length-1] != 'A'`
-///   - `prev.compareTo(next) == -1`
+/// Generates a lexicographically ordered string between A and B.
 ///
-/// The worst-case time compexity is `O(n)` where `n = max(prev.length, next.length) + 1`,
-/// but usually, `n` is very short as `between` and `generateOrderKeys` strive to generate
-/// a string of as short a length as possible.
+/// The worst-case time complexity is `O(n)`, where `n` is the maximum length of `prev` and `next` plus 1.
+/// However, `n` is usually very short, and thus acceptable for production environments.
 ///
-/// This function does not check the constraints specified above in the release build
-/// for performance reasons.
+/// Constraints:
+///   - Both `prev` and `next` must be composed of alphabets.
+///   - `prev` and `next` must not be null or empty.
+///   - `prev` and `next` must not be the same.
+///   - The last character of `prev` must not be 'A', and the last character of `next` must not be 'A'.
+///   - Lexicographically, `prev` must be less than `next` (i.e., `prev.compareTo(next) == -1`).
+///
+/// For performance reasons, it does not check the constraints specified above in the release build.
+/// However, you can manually verify these constraints using the `LexOrderValidator.checkBetweenArgs` method.
 ///
 /// Example:
 /// ```dart

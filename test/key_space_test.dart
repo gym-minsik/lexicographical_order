@@ -1,5 +1,5 @@
 import 'package:test/test.dart';
-import '../lib/src/key_space.dart';
+import 'package:lexicographical_order/src/key_space.dart';
 
 void main() {
   group('key_space', () {

@@ -63,21 +63,21 @@ Iterable<String> _generate(int count) sync* {
   }
 }
 
-/// Generate strings that satisfy the follwing constraints:
-/// 1. the lexicographical order.
-/// 2. equally-spaced to use as few additional characters as possible in the future.
+/// Generates strings that satisfy the following constraints:
+/// 1. They adhere to lexicographical order.
+/// 2. They are equally spaced to minimize the need for additional characters in the future.
 ///
 /// ### How to use?
-/// - If you have an ordered database table or collection for which you want to
-///   switch to efficient ordered system, generate order keys with this.
-/// - For the first order keys, use `generateOrderKeys(orderKeyCount)`.
+/// - If you have an ordered database table or collection and you want to
+///   switch to an efficient ordering system, use this function to generate order keys.
+/// - For the initial set of order keys, use `generateOrderKeys(orderKeyCount)`.
 ///
 /// Example:
 /// ```dart
 /// Future<void> addTodo(CreateTodo command) async {
 ///   final String orderKey = todos.isEmpty
-///     ? generateOrderKeys(1).first // <==
-///     : between(prev: todos.last.orderKey);
+///     ? generateOrderKeys(1).first // Use this when the todo list is empty.
+///     : between(prev: todos.last.orderKey); // Use this when adding to an existing list.
 ///
 ///   final todo = await todoRepository.create(command, orderKey);
 ///   todos.add(todo);

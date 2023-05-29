@@ -1,6 +1,6 @@
+import 'package:lexicographical_order/src/math.dart';
 import 'package:test/expect.dart';
 import 'package:test/scaffolding.dart';
-import '../lib/src/math.dart';
 
 void main() {
   group('roundToNearestEven()', () {
