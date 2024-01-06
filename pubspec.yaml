@@ -1,9 +1,9 @@
 name: lexicographical_order
 description: A string generator that helps to implement real-time editing of an ordered sequence. this makes reordering transactions faster and simpler.
-version: 1.4.0
+version: 1.5.0
 repository: https://github.com/sylfreee/lexicographical_order
 environment:
-  sdk: ">=2.12.0 <4.0.0"
+  sdk: '>=2.12.0 <4.0.0'
 
 dev_dependencies:
   lints: ^1.0.0

@@ -1,3 +1,6 @@
+## 1.5.0
+  - Remove unnecessary warning section from README to simplify usage understanding and emphasize the package's straightforward functionality.
+
 ## 1.4.0
 - Improved the documentation.
 - Updated pubspec.yaml for Dart 3.0 support.

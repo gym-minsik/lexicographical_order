@@ -48,7 +48,3 @@ It generates a series of strings to serve as sorting keys for data.
        /* omitted */
      }
      ```
-
-# Note of Caution
-
-For optimal results, it is recommended to exclusively utilize the 'between' and 'generateOrderKey' functions provided by this package for key generation. These functions are specifically tailored to maintain the lexicographical order of your data. The use of arguments derived from external sources in conjunction with the 'between' function may inadvertently disrupt the intended ordering of your data.
